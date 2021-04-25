@@ -15,6 +15,7 @@ export default class Game {
 
         this.gameFrame = 0;
         this.score = 0;
+        this.lives = 3;
     }
 
     startGame(){
@@ -27,22 +28,38 @@ export default class Game {
         this.handleBubbles();
         this.player.drawBalloon(ctx);
         this.drawScore();
-        requestAnimationFrame(() => this.draw(ctx));
+        this.drawLives();
+        if(this.lives > 0){
+            requestAnimationFrame(() => this.draw(ctx));
+        }
+        else{
+            this.gameOver();
+        }
+    }
+
+    gameOver(){
+        this.ctx.fillStyle = 'Black';
+        this.ctx.font = "100px Arial Bold";
+        this.ctx.fillText('GAME OVER', 100, 280);
     }
 
     handleBubbles(){
-        if(this.gameFrame % 50 == 0){
+        if(this.gameFrame % 40 == 0){
             this.bubblesArray.push(new Bubble(this.canvas));
         }
-        this.bubblesArray.forEach((bubble, index) => {
-            bubble.update(this.player.playerX, this.player.playerY);
-            bubble.drawBubble(this.ctx);
-            if(bubble.x > this.canvas.width + this.canvas.offsetLeft){
-                this.bubblesArray.splice(index, 1);
+        for(let i = 0 ; i < this.bubblesArray.length ; i++){
+            this.bubblesArray[i].update(this.player.playerX, this.player.playerY);
+            this.bubblesArray[i].drawBubble(this.ctx);
+            if(this.bubblesArray[i].y > this.canvas.height + this.canvas.offsetTop){
+                this.bubblesArray.splice(i, 1);
+                this.lives--;
+                if(this.lives <= 0){
+                    break;
+                }
             }
-            this.detectColision(bubble, index);
-            });
-            
+            this.detectColision(this.bubblesArray[i], i);
+        } 
+
         this.gameFrame++;
     }
 
@@ -57,8 +74,14 @@ export default class Game {
     }
 
     drawScore(){
-        this.ctx.fillStyle = 'Black';
-        this.ctx.font = "30px Verdana";
-        this.ctx.fillText('Score: ' + this.score, 20, 50);
+        this.ctx.fillStyle = 'White';
+        this.ctx.font = "30px Arial";
+        this.ctx.fillText('נקודות: ' + this.score, 660, 50);
+    }
+
+    drawLives(){
+        this.ctx.fillStyle = 'White';
+        this.ctx.font = "30px Arial";
+        this.ctx.fillText('חיים: ' + this.lives, 686, 90);
     }
 }
