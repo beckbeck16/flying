@@ -9,7 +9,7 @@ export default class Balloon{
         this.playerY = (this.canvas.height - this.playerHeight) / 2;
 
         this.img = new Image();
-        this.img.src = "../img/balloon.png";
+        this.img.src = "../src/img/balloon.png";
 
         this.rightPressed = false;
         this.leftPressed = false;

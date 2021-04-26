@@ -1,18 +1,18 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: {
         main: path.resolve(__dirname, './src/app.js'),
       },
       output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'deploy')
+        filename: 'index.bundle.js',
+        path: path.resolve(__dirname, 'dist')
       },
       devServer: {
-        contentBase: './deploy',
+        contentBase: './dist',
         open: true
       },
       module: {
@@ -35,10 +35,10 @@ module.exports = {
             use: [
               {
                 loader: 'file-loader',
-                // options: {
-                //   name: '[name].[ext]',
-                //   outputPath: 'img/'
-                // }
+                options: {
+                  name: '[name].[ext]',
+                  outputPath: './src/img/'
+                }
               },
             ],
           },
@@ -50,11 +50,14 @@ module.exports = {
       },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Webpack Output",
+            title: "BallooNadav",
         }),
         new CleanWebpackPlugin(),
-        new CopyPlugin([ {from:'src/img/',
-        // to:'img'
-      } , ]),
+        new CopyWebpackPlugin({ 
+          patterns: [
+            { from: 'src/img/', to: 'src/img/' },
+          ]
+        }
+      )
     ],
 };

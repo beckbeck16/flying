@@ -16,7 +16,7 @@ export default class Bubble{
     }
     drawBubble(ctx){
         this.img = new Image();
-        this.img.src = "../img/kids1.png";
+        this.img.src = "../src/img/kids1.png";
         ctx.drawImage(this.img, this.x - 50, this.y - 25);
     }
 }

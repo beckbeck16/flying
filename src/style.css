@@ -7,18 +7,11 @@
 
 canvas 
 { 
-    background: #4089f5
-    url(../src/img/cloudsn.gif)
+    background: #4089f5 url(../src/img/cloudsn.gif)
     no-repeat; 
     background-size: cover;
     background-position: center;
     display: block; 
     margin: 0 auto; 
     size: inherit;
-} 
-
-#output 
-{ 
-    text-align: center; 
-    margin-top: 30px; 
 } 
