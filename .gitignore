@@ -1,7 +1,3 @@
-t:cz
-<<<<<<< HEAD
-node_modules:diffg RE  =======
-
 node_modules/
 
 ### VisualStudioCode ###
@@ -10,4 +6,3 @@ node_modules/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
->>>>>>> 247fc8f0d7c3840ac610bc51e071731329c1431c
